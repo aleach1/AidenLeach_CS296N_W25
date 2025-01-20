@@ -1,0 +1,27 @@
+[
+  {
+    "Text": "What color is Madeline's hair before she uses her dash?",
+    "Options": [ "Red", "Blue", "Yellow", "Green" ],
+    "CorrectAnswerIndex": 0
+  },
+  {
+    "Text": "What color is Madeline's hair after she uses her dash?",
+    "Options": [ "Red", "Blue", "Yellow", "Green" ],
+    "CorrectAnswerIndex": 1
+  },
+  {
+    "Text": "What country is Celeste Mountain located in?",
+    "Options": [ "Canada", "USA", "Mexico", "Norway" ],
+    "CorrectAnswerIndex": 0
+  },
+  {
+    "Text": "Where is Theo, the main side character, from?",
+    "Options": [ "Seattle", "Portland", "Los Angeles", "New York" ],
+    "CorrectAnswerIndex": 0
+  },
+  {
+    "Text": "What does the fandom call Madeline's other self?",
+    "Options": [ "Evil Madeline", "Badeline", "Other Self"],
+    "CorrectAnswerIndex": 1
+  }
+]

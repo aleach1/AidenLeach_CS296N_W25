@@ -1,0 +1,26 @@
+﻿@model CelesteMountain.Models.StoryPost
+
+<form asp-action="PostStory" asp-controller="Home" method="post">
+    <div class="form-group">
+        <label>Title:</label>
+        <input asp-for="Title" class="form-control p-3" required /><br />
+    </div>
+    <div class="form-group">
+        <label>Topic:</label>
+        <input asp-for="Topic" class="form-control p-3" required /><br />
+    </div>
+    <div class="form-group">
+        <label>Year the Story Occured:</label>
+        <input type="number" asp-for="StoryYear" class="form-control p-3" required /><br />
+    </div>
+    <div class="form-group">
+        <label>Text:</label>
+        <textarea asp-for="Text" class="form-control p-3" required></textarea><br />
+    </div>
+    <div class="form-group">
+        <label>Name:</label>
+        <input asp-for="Name" class="form-control p-3" required /><br />
+    </div>
+    <input type="hidden" asp-for="DatePosted" value="DateTime.Now" />
+    <input type="submit" value="Submit Story" class="btn btn-info" />
+</form>

@@ -1,0 +1,32 @@
+﻿@model List<CelesteMountain.Models.StoryPost>
+@{
+    ViewData["Title"] = "Stories";
+}
+
+<h1 class="text-center fw-bolder">Stories Forum</h1>
+
+<form asp-action="Filter" asp-controller="Home" method="get">
+    <div class="form-group">
+        <label name="poster">Name of poster:</label>
+        <input name="poster" class="form-control p-3" /><br />
+    </div>
+    <div class="form-group">
+        <label name="date">Date posted: (mm/dd/yy)</label>
+        <input name="date" class="form-control p-3" /><br />
+    </div>
+    <input type="submit" value="Filter Stories" class="btn btn-info" />
+</form>
+
+@foreach (var story in Model)
+{
+    <div class="container mt-5">
+        <h2>@story.Title</h2>
+        <h3>@story.Topic</h3>
+        <p>@story.Text <br> <div class="container mx-5"> -Circa @story.StoryYear</div></p>
+        <p><strong>Posted by:</strong> @story.Name <div class="fst-italic small m-0"> @story.DatePosted.ToShortDateString()</div></p>
+    </div>
+}
+
+<div class="container mt-lg-5">
+    <a href="@Url.Action("PostStory", "Home")" class="btn btn-info">Contribute Your Story</a>
+</div>
