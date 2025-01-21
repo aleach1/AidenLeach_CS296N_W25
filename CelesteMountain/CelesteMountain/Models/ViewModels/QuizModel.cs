@@ -1,4 +1,4 @@
-﻿namespace CelesteMountain.Models
+﻿namespace CelesteMountain.Models.ViewModels
 {
     public class QuizModel
     {

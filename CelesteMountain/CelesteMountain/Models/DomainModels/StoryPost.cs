@@ -1,4 +1,4 @@
-﻿namespace CelesteMountain.Models
+﻿namespace CelesteMountain.Models.DomainModels
 {
     public class StoryPost
     {

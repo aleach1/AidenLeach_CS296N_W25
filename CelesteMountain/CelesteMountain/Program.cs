@@ -1,4 +1,6 @@
 using CelesteMountain.Models.Data;
+using CelesteMountain.Models.DomainModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -11,6 +13,10 @@ builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
 builder.Services.AddDbContext<CelesteMountainContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+  .AddEntityFrameworkStores<CelesteMountainContext>()
+  .AddDefaultTokenProviders();
 
 // Register the repository and repository interface
 builder.Services.AddTransient<IStoryPostRepository, StoryPostRepository>();
@@ -33,6 +39,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",

@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using CelesteMountain.Models.DomainModels;
 
-namespace CelesteMountain.Data
+namespace CelesteMountain.Models.Data
 {
     public class StoryPostRepository : IStoryPostRepository
     {
@@ -18,7 +18,7 @@ namespace CelesteMountain.Data
         public List<StoryPost> GetAllStorys()
         {
             var storys = _context.StoryPosts
-              .ToList<StoryPost>();
+              .ToList();
             return storys;
         }
 

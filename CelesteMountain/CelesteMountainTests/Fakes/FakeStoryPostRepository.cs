@@ -1,5 +1,5 @@
-﻿using CelesteMountain.Data;
-using CelesteMountain.Models;
+﻿using CelesteMountain.Models.Data;
+using CelesteMountain.Models.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

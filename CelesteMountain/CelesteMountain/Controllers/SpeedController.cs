@@ -1,4 +1,5 @@
 ﻿using CelesteMountain.Models;
+using CelesteMountain.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

@@ -2,7 +2,7 @@
 using System;
 using CelesteMountain.Models.DomainModels;
 
-namespace CelesteMountain.Data
+namespace CelesteMountain.Models.Data
 {
     public class SeedData
 
@@ -24,7 +24,7 @@ namespace CelesteMountain.Data
                 context.StoryPosts.Add(storyPost);  // queues up a review to be added to the DB
 
 
-                storyPost = new StoryPost 
+                storyPost = new StoryPost
                 {
                     Title = "I just started speedrunning, and strawberry jam is great for tech.",
                     Topic = "Speedrunning",

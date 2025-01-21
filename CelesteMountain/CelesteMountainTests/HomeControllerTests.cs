@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CelesteMountainTests.Fakes;
 using CelesteMountain.Controllers;
+using CelesteMountain.Models.DomainModels;
 using CelesteMountain.Models;
 using Microsoft.Extensions.Logging;
 using CelesteMountain.Models.Data;
