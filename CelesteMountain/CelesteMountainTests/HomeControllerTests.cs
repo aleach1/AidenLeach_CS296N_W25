@@ -33,7 +33,6 @@ namespace CelesteMountainTests
                 Topic = "Speedrunning",
                 StoryYear = 2024,
                 Text = "I never really knew how to do a lot of speedrunning tech, but the libraries in strawberry jam really helped me.",
-                Name = "Admin",
                 DatePosted = DateTime.Now
 
             };

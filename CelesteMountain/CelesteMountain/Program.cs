@@ -14,13 +14,14 @@ var connectionString = builder.Configuration.GetConnectionString("MySqlConnectio
 builder.Services.AddDbContext<CelesteMountainContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-builder.Services.AddIdentity<AppUser, IdentityRole>()
-  .AddEntityFrameworkStores<CelesteMountainContext>()
-  .AddDefaultTokenProviders();
+
 
 // Register the repository and repository interface
 builder.Services.AddTransient<IStoryPostRepository, StoryPostRepository>();
-
+builder.Services.AddControllersWithViews();
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+  .AddEntityFrameworkStores<CelesteMountainContext>()
+  .AddDefaultTokenProviders();
 
 
 var app = builder.Build();
@@ -49,7 +50,7 @@ app.MapControllerRoute(
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<CelesteMountainContext>();
-    SeedData.Seed(dbContext);
+    SeedData.Seed(dbContext, scope.ServiceProvider);
 
 }
 
