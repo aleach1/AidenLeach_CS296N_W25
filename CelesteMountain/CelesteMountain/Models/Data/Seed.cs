@@ -1,13 +1,14 @@
 ﻿using System.Runtime.Intrinsics.X86;
 using System;
 using CelesteMountain.Models.DomainModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace CelesteMountain.Models.Data
 {
     public class SeedData
 
     {
-        public static void Seed(CelesteMountainContext context)
+        public static void Seed(CelesteMountainContext context, IServiceProvider provider)
         {
             if (!context.StoryPosts.Any())  // this is to prevent adding duplicate data
             {
@@ -51,7 +52,23 @@ namespace CelesteMountain.Models.Data
 
                 context.SaveChanges(); // stores all the reviews in the DB
 
+                var userManager = provider
+                    .GetRequiredService<UserManager<AppUser>>();
+
+                const string SECRET_PASSWORD = "Secret!123";
+                AppUser mickMouse = new AppUser { UserName = "Mickey Mouse" };
+                var result = userManager.CreateAsync(mickMouse, SECRET_PASSWORD);
+
+
+                AppUser goof = new AppUser { UserName = "Goofy" };
+                result = userManager.CreateAsync(goof, SECRET_PASSWORD);
+
+
+                AppUser minMouse = new AppUser { UserName = "Minnie Mouse" };
+                result = userManager.CreateAsync(minMouse, SECRET_PASSWORD);
+
             }
+
 
         }
 
