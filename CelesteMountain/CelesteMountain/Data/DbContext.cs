@@ -1,5 +1,5 @@
-﻿namespace CelesteMountain.Models.Data;
-using CelesteMountain.Models.DomainModels;
+﻿namespace CelesteMountain.Data;
+using CelesteMountain.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CelesteMountain.Models.ViewModels
+namespace CelesteMountain.Models
 {
     public class RegisterViewModel
     {

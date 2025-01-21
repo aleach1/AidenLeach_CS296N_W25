@@ -1,5 +1,5 @@
 using Xunit;
-using CelesteMountain.Models.ViewModels;
+using CelesteMountain.Models;
 
 namespace CelesteMountainTests.Models
 {

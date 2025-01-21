@@ -1,8 +1,7 @@
-﻿using CelesteMountain.Models.Data;
-using CelesteMountain.Models.DomainModels;
-using CelesteMountain.Models.ViewModels;
+﻿using CelesteMountain.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using CelesteMountain.Data;
 
 namespace CelesteMountain.Controllers
 {

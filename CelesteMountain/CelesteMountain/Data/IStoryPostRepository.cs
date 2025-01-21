@@ -1,6 +1,6 @@
-﻿using CelesteMountain.Models.DomainModels;
+﻿using CelesteMountain.Models;
 
-namespace CelesteMountain.Models.Data
+namespace CelesteMountain.Data
 {
     public interface IStoryPostRepository
     {

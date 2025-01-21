@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System;
 using Microsoft.EntityFrameworkCore;
-using CelesteMountain.Models.DomainModels;
+using CelesteMountain.Models;
 
-namespace CelesteMountain.Models.Data
+namespace CelesteMountain.Data
 {
     public class StoryPostRepository : IStoryPostRepository
     {

@@ -1,14 +1,14 @@
 ﻿using System.Runtime.Intrinsics.X86;
 using System;
-using CelesteMountain.Models.DomainModels;
+using CelesteMountain.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace CelesteMountain.Models.Data
+namespace CelesteMountain.Data
 {
     public class SeedData
 
     {
-        public static async void Seed(CelesteMountainContext context, IServiceProvider provider)
+        public static void Seed(CelesteMountainContext context, IServiceProvider provider)
         {
             if (!context.StoryPosts.Any())  // this is to prevent adding duplicate data
             {
@@ -16,14 +16,9 @@ namespace CelesteMountain.Models.Data
                     .GetRequiredService<UserManager<AppUser>>();
 
                 const string SECRET_PASSWORD = "Secret!123";
-                AppUser mickMouse = new AppUser { UserName = "MickeyMouse" };
-                var result = userManager.CreateAsync(mickMouse, SECRET_PASSWORD);
+                AppUser rootUser = new AppUser { UserName = "rootUser" };
+                var result = userManager.CreateAsync(rootUser, SECRET_PASSWORD);
 
-                AppUser goof = new AppUser { UserName = "Goofy" };
-                result = userManager.CreateAsync(goof, SECRET_PASSWORD);
-
-                AppUser minMouse = new AppUser { UserName = "MinnieMouse" };
-                result = userManager.CreateAsync(minMouse, SECRET_PASSWORD);
 
                 StoryPost storyPost = new StoryPost
                 {
@@ -35,7 +30,7 @@ namespace CelesteMountain.Models.Data
                     DatePosted = DateTime.Parse("11/29/24")
                 };
 
-                context.StoryPosts.Add(storyPost);  // queues up a review to be added to the DB
+                context.StoryPosts.AddAsync(storyPost);  // queues up a review to be added to the DB
 
 
                 storyPost = new StoryPost
@@ -48,7 +43,7 @@ namespace CelesteMountain.Models.Data
                     DatePosted = DateTime.Parse("11/30/24")
                 };
 
-                context.StoryPosts.Add(storyPost);
+                context.StoryPosts.AddAsync(storyPost);
 
                 storyPost = new StoryPost // need to change the contents of the other posts
                 {
@@ -60,12 +55,12 @@ namespace CelesteMountain.Models.Data
                     DatePosted = DateTime.Parse("11/30/24")
                 };
 
-                context.StoryPosts.Add(storyPost);
+                context.StoryPosts.AddAsync(storyPost);
 
 
                 context.SaveChanges(); // stores all the reviews in the DB
 
-                
+
 
             }
 

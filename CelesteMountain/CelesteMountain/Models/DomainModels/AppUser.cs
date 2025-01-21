@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace CelesteMountain.Models.DomainModels
+namespace CelesteMountain.Models
 {
     public class AppUser : IdentityUser
     {

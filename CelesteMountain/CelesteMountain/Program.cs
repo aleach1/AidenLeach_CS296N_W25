@@ -1,8 +1,8 @@
-using CelesteMountain.Models.Data;
-using CelesteMountain.Models.DomainModels;
+using CelesteMountain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using CelesteMountain.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +18,8 @@ builder.Services.AddDbContext<CelesteMountainContext>(options =>
 
 // Register the repository and repository interface
 builder.Services.AddTransient<IStoryPostRepository, StoryPostRepository>();
-builder.Services.AddControllersWithViews();
+
+//Add identity
 builder.Services.AddIdentity<AppUser, IdentityRole>()
   .AddEntityFrameworkStores<CelesteMountainContext>()
   .AddDefaultTokenProviders();

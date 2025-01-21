@@ -1,5 +1,4 @@
-﻿using CelesteMountain.Models.ViewModels;
-using CelesteMountain.Models.DomainModels;
+﻿using CelesteMountain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,10 +27,7 @@ namespace CelesteMountain.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new AppUser
-                {
-                    UserName = model.Username
-                };
+                var user = new AppUser { UserName = model.Username };
                 var result = await userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)

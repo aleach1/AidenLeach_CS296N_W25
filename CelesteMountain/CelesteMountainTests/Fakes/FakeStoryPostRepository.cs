@@ -1,10 +1,10 @@
-﻿using CelesteMountain.Models.Data;
-using CelesteMountain.Models.DomainModels;
+﻿using CelesteMountain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CelesteMountain.Data;
 
 namespace CelesteMountainTests.Fakes
 {

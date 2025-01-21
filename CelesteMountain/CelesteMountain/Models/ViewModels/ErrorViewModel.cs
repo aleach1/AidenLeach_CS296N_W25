@@ -1,4 +1,4 @@
-namespace CelesteMountain.Models.ViewModels
+namespace CelesteMountain.Models
 {
     public class ErrorViewModel
     {

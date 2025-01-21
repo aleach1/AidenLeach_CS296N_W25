@@ -2,8 +2,7 @@
 using System.Text.Json;
 using System.IO;
 using System.Collections.Generic;
-using CelesteMountain.Models.ViewModels;
-using CelesteMountain.Models.DomainModels;
+using CelesteMountain.Models;
 
 namespace CelesteMountain.Controllers
 {
