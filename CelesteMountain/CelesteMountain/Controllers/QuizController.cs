@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
-using CelesteMountain.Models;
 using System.IO;
 using System.Collections.Generic;
+using CelesteMountain.Models.ViewModels;
 
 namespace CelesteMountain.Controllers
 {

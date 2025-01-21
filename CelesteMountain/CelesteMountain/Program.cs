@@ -1,4 +1,4 @@
-using CelesteMountain.Data;
+using CelesteMountain.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 

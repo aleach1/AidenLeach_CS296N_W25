@@ -1,5 +1,5 @@
-﻿using CelesteMountain.Data;
-using CelesteMountain.Models;
+﻿using CelesteMountain.Models.Data;
+using CelesteMountain.Models.DomainModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

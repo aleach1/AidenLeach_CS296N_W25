@@ -1,6 +1,6 @@
-﻿using CelesteMountain.Models;
-using System.Runtime.Intrinsics.X86;
+﻿using System.Runtime.Intrinsics.X86;
 using System;
+using CelesteMountain.Models.DomainModels;
 
 namespace CelesteMountain.Data
 {

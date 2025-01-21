@@ -1,7 +1,7 @@
-﻿using CelesteMountain.Models;
-using System.Linq;
+﻿using System.Linq;
 using System;
 using Microsoft.EntityFrameworkCore;
+using CelesteMountain.Models.DomainModels;
 
 namespace CelesteMountain.Data
 {
