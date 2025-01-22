@@ -45,9 +45,12 @@ namespace CelesteMountain.Controllers
             }
             return View(model);
         }
-        public IActionResult Index()
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
         {
-            return View();
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
