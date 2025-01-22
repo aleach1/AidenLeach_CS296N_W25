@@ -2,6 +2,7 @@
 using System;
 using CelesteMountain.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Runtime.CompilerServices;
 
 namespace CelesteMountain.Data
 {
@@ -18,7 +19,10 @@ namespace CelesteMountain.Data
                 const string SECRET_PASSWORD = "Secret!123";
                 AppUser rootUser = new AppUser { UserName = "rootUser" };
                 var result = userManager.CreateAsync(rootUser, SECRET_PASSWORD);
-
+                AppUser userTwo = new AppUser { UserName = "UserTwo" };
+                result = userManager.CreateAsync(rootUser, SECRET_PASSWORD);
+                AppUser userThree = new AppUser { UserName = "UserThree" };
+                result = userManager.CreateAsync(rootUser, SECRET_PASSWORD);
 
                 StoryPost storyPost = new StoryPost
                 {
@@ -26,11 +30,11 @@ namespace CelesteMountain.Data
                     Topic = "Story Posts",
                     StoryYear = 2024,
                     Text = "This is the area of the website that you can submit stories about Celeste, and it is formatted as seen.",
-                    Name = "Admin",
+                    Poster = rootUser,
                     DatePosted = DateTime.Parse("11/29/24")
                 };
 
-                context.StoryPosts.AddAsync(storyPost);  // queues up a review to be added to the DB
+                context.StoryPosts.Add(storyPost);  // queues up a review to be added to the DB
 
 
                 storyPost = new StoryPost
@@ -39,11 +43,11 @@ namespace CelesteMountain.Data
                     Topic = "Speedrunning",
                     StoryYear = 2024,
                     Text = "I never really knew how to do a lot of speedrunning tech, but the libraries in strawberry jam really helped me.",
-                    Name = "Admin",
+                    Poster = userTwo,
                     DatePosted = DateTime.Parse("11/30/24")
                 };
 
-                context.StoryPosts.AddAsync(storyPost);
+                context.StoryPosts.Add(storyPost);
 
                 storyPost = new StoryPost // need to change the contents of the other posts
                 {
@@ -51,11 +55,11 @@ namespace CelesteMountain.Data
                     Topic = "New Player",
                     StoryYear = 2024,
                     Text = "I recently started playing Celeste, and I have hundreds of deaths just from the first chapter. Is this normal, or am I just bad at platformers?",
-                    Name = "Jayden Steele",
+                    Poster = userThree,
                     DatePosted = DateTime.Parse("11/30/24")
                 };
 
-                context.StoryPosts.AddAsync(storyPost);
+                context.StoryPosts.Add(storyPost);
 
 
                 context.SaveChanges(); // stores all the reviews in the DB

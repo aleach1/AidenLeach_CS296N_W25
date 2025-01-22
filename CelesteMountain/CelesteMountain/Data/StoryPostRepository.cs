@@ -18,6 +18,7 @@ namespace CelesteMountain.Data
         public List<StoryPost> GetAllStorys()
         {
             var storys = _context.StoryPosts
+                .Include(story => story.Poster)
               .ToList();
             return storys;
         }
@@ -27,6 +28,7 @@ namespace CelesteMountain.Data
         {
             var story = _context.StoryPosts
               .Where(story => story.Id == id)
+              .Include(story => story.Poster)
               .SingleOrDefault();
             return story;
         }

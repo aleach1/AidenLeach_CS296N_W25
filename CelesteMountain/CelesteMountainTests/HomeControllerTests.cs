@@ -8,6 +8,7 @@ using CelesteMountain.Controllers;
 using CelesteMountain.Models;
 using Microsoft.Extensions.Logging;
 using CelesteMountain.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace CelesteMountainTests
 {
@@ -16,10 +17,11 @@ namespace CelesteMountainTests
         IStoryPostRepository _repo = new FakeStoryPostRepository();
         private readonly ILogger<HomeController> _logger;
         HomeController controller;
+        UserManager<AppUser> userManager;
 
         public HomeControllerTests()
         {
-            controller = new HomeController(_repo, _logger);
+            controller = new HomeController(_repo, _logger, userManager);
         }
 
         [Fact]

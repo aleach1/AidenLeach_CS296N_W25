@@ -2,19 +2,22 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using CelesteMountain.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace CelesteMountain.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private UserManager<AppUser> userManager;
 
         IStoryPostRepository _repo;
 
-        public HomeController(IStoryPostRepository repo, ILogger<HomeController> logger)
+        public HomeController(IStoryPostRepository repo, ILogger<HomeController> logger, UserManager<AppUser> usrMngr)
         {
             _repo = repo;
             _logger = logger;
+            userManager = usrMngr;
         }
 
 
@@ -38,7 +41,7 @@ namespace CelesteMountain.Controllers
         public IActionResult Filter(string poster, string date)
         {
             var storys = _repo.GetAllStorys()
-                .Where(s => poster == null || s.Name == poster)
+                .Where(s => poster == null || s.Poster.UserName == poster)
                 .Where(s => date == null || DateOnly.FromDateTime(s.DatePosted) == DateOnly.Parse(date))
                 .ToList();
 
@@ -54,6 +57,9 @@ namespace CelesteMountain.Controllers
         [HttpPost]
         public IActionResult PostStory(StoryPost newStory)
         {
+            // get appuser for current user
+            newStory.Poster = userManager.GetUserAsync(User).Result;
+
             if (_repo.NewStory(newStory) > 0)
             {
                 return RedirectToAction("Index");
