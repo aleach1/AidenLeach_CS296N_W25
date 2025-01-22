@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using CelesteMountain.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace CelesteMountain.Controllers
 {
@@ -10,14 +11,17 @@ namespace CelesteMountain.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private UserManager<AppUser> userManager;
+        private SignInManager<AppUser> signInManager;
 
         IStoryPostRepository _repo;
 
-        public HomeController(IStoryPostRepository repo, ILogger<HomeController> logger, UserManager<AppUser> usrMngr)
+        public HomeController(IStoryPostRepository repo, ILogger<HomeController> logger, UserManager<AppUser> usrMngr,
+            SignInManager<AppUser> signInMngr)
         {
             _repo = repo;
             _logger = logger;
             userManager = usrMngr;
+            signInManager = signInMngr;
         }
 
 
@@ -57,6 +61,13 @@ namespace CelesteMountain.Controllers
         [HttpPost]
         public IActionResult PostStory(StoryPost newStory)
         {
+            // send user to login if not logged in
+            if (!signInManager.IsSignedIn(User))
+            {
+                var returnURL = Request.GetEncodedUrl();
+                return RedirectToAction("Login", "Account", returnURL);
+            }
+
             // get appuser for current user
             newStory.Poster = userManager.GetUserAsync(User).Result;
 
