@@ -38,7 +38,7 @@ namespace CelesteMountain.Controllers
         public IActionResult Filter(string poster, string date)
         {
             var storys = _repo.GetAllStorys()
-                .Where(s => poster == null || s.Name == poster)
+                .Where(s => poster == null || s.Poster.UserName == poster)
                 .Where(s => date == null || DateOnly.FromDateTime(s.DatePosted) == DateOnly.Parse(date))
                 .ToList();
 
