@@ -7,5 +7,6 @@ namespace CelesteMountain.Data
         public StoryPost GetStoryById(int id);
         public List<StoryPost> GetAllStorys();
         public int NewStory(StoryPost model);
+        public int DeleteStorys(AppUser appUser);
     }
 }

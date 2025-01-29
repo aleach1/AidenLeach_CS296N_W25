@@ -40,5 +40,17 @@ namespace CelesteMountain.Data
             _context.StoryPosts.Add(model);
             return _context.SaveChanges();
         }
+
+        // deletes all stories tied to a user
+
+        public int DeleteStorys(AppUser appUser)
+        {
+            var story = _context.StoryPosts
+              .Where(story => story.Poster == appUser)
+              .Include(story => story.Poster)
+              .ToList();
+            _context.StoryPosts.RemoveRange(story);
+            return _context.SaveChanges();
+        }
     }
 }

@@ -18,10 +18,11 @@ namespace CelesteMountainTests
         private readonly ILogger<HomeController> _logger;
         HomeController controller;
         UserManager<AppUser> userManager;
+        private SignInManager<AppUser> signInManager;
 
         public HomeControllerTests()
         {
-            controller = new HomeController(_repo, _logger, userManager);
+            controller = new HomeController(_repo, _logger, userManager, signInManager);
         }
 
         [Fact]

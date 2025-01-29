@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CelesteMountain.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CelesteMountainTests.Fakes
 {
@@ -38,6 +39,11 @@ namespace CelesteMountainTests.Fakes
                 status = 1;
             }
             return status;
+        }
+        public int DeleteStorys(AppUser appUser)
+        {
+            //Need to make fake deletestorys
+            return 0;
         }
     }
 }
