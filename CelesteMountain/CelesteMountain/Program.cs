@@ -51,6 +51,7 @@ app.MapControllerRoute(
 //get DbContext seed data
 using (var scope = app.Services.CreateScope())
 {
+    await SeedUsers.CreateAdminUser(scope.ServiceProvider);
     var dbContext = scope.ServiceProvider.GetRequiredService<CelesteMountainContext>();
     SeedData.Seed(dbContext, scope.ServiceProvider);
 

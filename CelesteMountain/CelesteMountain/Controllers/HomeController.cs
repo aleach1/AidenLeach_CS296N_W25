@@ -4,6 +4,7 @@ using System.Diagnostics;
 using CelesteMountain.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CelesteMountain.Controllers
 {
@@ -52,12 +53,14 @@ namespace CelesteMountain.Controllers
             return View("Stories", storys);
         }
 
+        [Authorize]
         public IActionResult PostStory()
         {
 
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult PostStory(StoryPost newStory)
         {
