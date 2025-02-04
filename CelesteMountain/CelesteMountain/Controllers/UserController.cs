@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using CelesteMountain.Models;
 using System.Data;
 using CelesteMountain.Data;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace CelesteMountain.Controllers
@@ -26,10 +27,10 @@ namespace CelesteMountain.Controllers
         public async Task<IActionResult> Index()
         {
             List<AppUser> users = new List<AppUser>();
-            foreach (AppUser user in userManager.Users.ToList())
+            users = await userManager.Users.ToListAsync();
+            foreach (AppUser user in users)
             {
                 user.RoleNames = await userManager.GetRolesAsync(user);
-                users.Add(user);
             }
             UserViewModel model = new UserViewModel
             {
@@ -74,7 +75,7 @@ namespace CelesteMountain.Controllers
             AppUser user = await userManager.FindByIdAsync(id);
             if (user != null)
             {
-                _repo.DeleteStorys(user);
+                _repo.DeleteStorysAsync(user);
                 IdentityResult result = await userManager.DeleteAsync(user);
                 if (!result.Succeeded)
                 { // if failed

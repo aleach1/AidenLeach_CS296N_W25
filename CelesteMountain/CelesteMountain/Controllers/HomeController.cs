@@ -62,7 +62,7 @@ namespace CelesteMountain.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult PostStory(StoryPost newStory)
+        public async Task<IActionResult> PostStory(StoryPost newStory)
         {
             // send user to login if not logged in
             if (!signInManager.IsSignedIn(User))
@@ -73,8 +73,11 @@ namespace CelesteMountain.Controllers
 
             // get appuser for current user
             newStory.Poster = userManager.GetUserAsync(User).Result;
-
-            if (_repo.NewStory(newStory) > 0)
+            if (userManager != null)
+            {
+                newStory.Poster = await userManager.GetUserAsync(User);
+            }
+            if (await _repo.NewStoryAsync(newStory) > 0)
             {
                 return RedirectToAction("Index");
             }

@@ -29,7 +29,7 @@ namespace CelesteMountainTests.Fakes
         }
 
         //adds a story to the database and returns a positive value if succussful
-        public int NewStory(StoryPost model)
+        public async Task<int> NewStoryAsync(StoryPost model)
         {
             int status = 0;
             if (model != null)
@@ -40,10 +40,18 @@ namespace CelesteMountainTests.Fakes
             }
             return status;
         }
-        public int DeleteStorys(AppUser appUser)
+        public async Task<int> DeleteStorysAsync(AppUser appUser)
         {
-            //Need to make fake deletestorys
-            return 0;
+            int count = 0;
+            var storys = _storyPosts
+              .Where(story => story.Poster == appUser)
+              .ToList();
+            foreach (var story in storys)
+            {
+                _storyPosts.Remove(story);
+                count++;
+            }
+            return count;
         }
     }
 }

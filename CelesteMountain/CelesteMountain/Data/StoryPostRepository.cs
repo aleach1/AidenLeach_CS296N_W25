@@ -34,23 +34,27 @@ namespace CelesteMountain.Data
         }
 
         //adds a story to the database and returns a positive value if succussful
-        public int NewStory(StoryPost model)
+        public async Task<int> NewStoryAsync(StoryPost model)
         {
             model.DatePosted = DateTime.Now;
             _context.StoryPosts.Add(model);
-            return _context.SaveChanges();
+            Task<int> task = _context.SaveChangesAsync();
+            int result = await task;
+            return result;
         }
 
         // deletes all stories tied to a user
 
-        public int DeleteStorys(AppUser appUser)
+        public async Task<int> DeleteStorysAsync(AppUser appUser)
         {
             var story = _context.StoryPosts
               .Where(story => story.Poster == appUser)
               .Include(story => story.Poster)
               .ToList();
             _context.StoryPosts.RemoveRange(story);
-            return _context.SaveChanges();
+            Task<int> task = _context.SaveChangesAsync();
+            int result = await task;
+            return result;
         }
     }
 }
