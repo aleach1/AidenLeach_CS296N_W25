@@ -38,7 +38,7 @@ namespace CelesteMountainTests.Fakes
                 _storyPosts.Add(model);
                 status = 1;
             }
-            return status;
+            return await Task.FromResult(status);
         }
         public async Task<int> DeleteStorysAsync(AppUser appUser)
         {
@@ -51,7 +51,7 @@ namespace CelesteMountainTests.Fakes
                 _storyPosts.Remove(story);
                 count++;
             }
-            return count;
+            return await Task.FromResult(count);
         }
     }
 }
