@@ -8,5 +8,6 @@ namespace CelesteMountain.Data
         public List<StoryPost> GetAllStorys();
         public Task<int> NewStoryAsync(StoryPost model);
         public Task<int> DeleteStorysAsync(AppUser appUser);
+        public Task<int> NewCommentAsync(Comment model);
     }
 }

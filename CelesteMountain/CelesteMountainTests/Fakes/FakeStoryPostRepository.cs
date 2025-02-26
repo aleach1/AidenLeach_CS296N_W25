@@ -12,6 +12,7 @@ namespace CelesteMountainTests.Fakes
     public class FakeStoryPostRepository : IStoryPostRepository
     {
         private List<StoryPost> _storyPosts = new List<StoryPost>();
+        private List<Comment> _comments = new List<Comment>();
 
         
 
@@ -24,7 +25,7 @@ namespace CelesteMountainTests.Fakes
         //return a storypost with a specific id
         public StoryPost GetStoryById(int id)
         {
-            StoryPost storyPost = _storyPosts.Find(s => s.Id == id);
+            StoryPost storyPost = _storyPosts.Find(s => s.StoryPostId == id);
             return storyPost;
         }
 
@@ -34,12 +35,25 @@ namespace CelesteMountainTests.Fakes
             int status = 0;
             if (model != null)
             {
-                model.Id = _storyPosts.Count + 1;
+                model.StoryPostId = _storyPosts.Count + 1;
                 _storyPosts.Add(model);
                 status = 1;
             }
             return await Task.FromResult(status);
         }
+
+        public async Task<int> NewCommentAsync(Comment model)
+        {
+            int status = 0;
+            if (model != null)
+            {
+                model.CommentId = _comments.Count + 1;
+                _comments.Add(model);
+                status = 1;
+            }
+            return await Task.FromResult(status);
+        }
+
         public async Task<int> DeleteStorysAsync(AppUser appUser)
         {
             int count = 0;

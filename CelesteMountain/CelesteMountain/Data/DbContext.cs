@@ -17,6 +17,6 @@ public class CelesteMountainContext : IdentityDbContext<AppUser>
 
     // one DbSet for each domain model class
     public DbSet<StoryPost> StoryPosts { get; set; } = null!;
-
+    public DbSet<Comment> Comments { get; set; } = null!;
 }
 

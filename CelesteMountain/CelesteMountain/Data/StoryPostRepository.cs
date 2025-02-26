@@ -19,6 +19,8 @@ namespace CelesteMountain.Data
         {
             var storys = _context.StoryPosts
                 .Include(story => story.Poster)
+                .Include(story => story.Comments)
+                .ThenInclude(comment => comment.Commenter)
               .ToList();
             return storys;
         }
@@ -27,7 +29,7 @@ namespace CelesteMountain.Data
         public StoryPost GetStoryById(int id)
         {
             var story = _context.StoryPosts
-              .Where(story => story.Id == id)
+              .Where(story => story.StoryPostId == id)
               .Include(story => story.Poster)
               .SingleOrDefault();
             return story;
@@ -38,6 +40,15 @@ namespace CelesteMountain.Data
         {
             model.DatePosted = DateTime.Now;
             _context.StoryPosts.Add(model);
+            Task<int> task = _context.SaveChangesAsync();
+            int result = await task;
+            return result;
+        }
+
+        public async Task<int> NewCommentAsync(Comment model)
+        {
+            model.DatePosted = DateTime.Now;
+            _context.Comments.Add(model);
             Task<int> task = _context.SaveChangesAsync();
             int result = await task;
             return result;

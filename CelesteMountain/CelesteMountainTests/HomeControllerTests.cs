@@ -43,7 +43,7 @@ namespace CelesteMountainTests
             var result = controller.PostStory(newPost);
 
             // Assert: Verify that StoryPost was added to repository
-            var addedRepo = _repo.GetStoryById(newPost.Id);
+            var addedRepo = _repo.GetStoryById(newPost.StoryPostId);
 
             Assert.NotNull(addedRepo);
             Assert.Equal(addedRepo, newPost);

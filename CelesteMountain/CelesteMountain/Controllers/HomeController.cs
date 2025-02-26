@@ -39,7 +39,8 @@ namespace CelesteMountain.Controllers
         public IActionResult Stories()
         {
             var posts = _repo.GetAllStorys(); // For fetching posts and ratings from the database
-            return View(posts);
+            StoryViewModel StoryVM = new StoryViewModel { Stories = posts };
+            return View(StoryVM);
         }
 
         [HttpGet]
@@ -84,6 +85,42 @@ namespace CelesteMountain.Controllers
             else
             {
                 ViewBag.ErrorMessage = "There was an error saving the review.";
+                return View();
+            }
+        }
+
+        [Authorize]
+        public IActionResult PostComment(StoryViewModel StoryVM)
+        {
+            CommentViewModel CommentVM = new CommentViewModel{Story = StoryVM.Story};
+            return View(CommentVM);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> PostComment(CommentViewModel commentVM)
+        {
+            Comment newComment = commentVM.Comment;
+            // send user to login if not logged in
+            if (!signInManager.IsSignedIn(User))
+            {
+                var returnURL = Request.GetEncodedUrl();
+                return RedirectToAction("Login", "Account", returnURL);
+            }
+
+            // get appuser for current user
+            newComment.Commenter = userManager.GetUserAsync(User).Result;
+            if (userManager != null)
+            {
+                newComment.Commenter = await userManager.GetUserAsync(User);
+            }
+            if (await _repo.NewCommentAsync(newComment) > 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "There was an error saving the comment.";
                 return View();
             }
         }

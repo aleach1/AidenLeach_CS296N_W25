@@ -1,4 +1,4 @@
-﻿@model List<StoryPost>
+﻿@model StoryViewModel
 @{
     ViewData["Title"] = "Stories";
 }
@@ -17,7 +17,7 @@
     <input type="submit" value="Filter Stories" class="btn btn-info" />
 </form>
 
-@foreach (var story in Model)
+@foreach (var story in Model.Stories)
 {
     <div class="container mt-5">
         <h2>@story.Title</h2>
@@ -26,6 +26,10 @@
         <p><strong>Posted by:</strong> @if (story.Poster.UserName != null) { <span>@story.Poster.UserName</span>} 
                                         else{<span>anonymous</span>} 
         <div class="fst-italic small m-0"> @story.DatePosted.ToShortDateString()</div></p>
+        <form asp-action="PostComment" asp-controller="Home" method="get">
+            <input type="hidden" asp-for="Story" value="@story"/>
+            <input type="submit" value="Comment" class="btn btn-outline-info"/>
+        </form>
     </div>
 }
 
