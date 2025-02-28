@@ -31,6 +31,8 @@ namespace CelesteMountain.Data
             var story = _context.StoryPosts
               .Where(story => story.StoryPostId == id)
               .Include(story => story.Poster)
+              .Include(story => story.Comments)
+              .ThenInclude(comment => comment.Commenter)
               .SingleOrDefault();
             return story;
         }

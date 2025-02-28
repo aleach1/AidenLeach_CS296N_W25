@@ -20,16 +20,25 @@
 @foreach (var story in Model.Stories)
 {
     <div class="container mt-5">
+        <p>@story.Comments.Count</p>
         <h2>@story.Title</h2>
         <h3>@story.Topic</h3>
         <p>@story.Text <br> <div class="container mx-5"> -Circa @story.StoryYear</div></p>
         <p><strong>Posted by:</strong> @if (story.Poster.UserName != null) { <span>@story.Poster.UserName</span>} 
                                         else{<span>anonymous</span>} 
         <div class="fst-italic small m-0"> @story.DatePosted.ToShortDateString()</div></p>
-        <form asp-action="PostComment" asp-controller="Home" method="get">
-            <input type="hidden" asp-for="Story" value="@story"/>
-            <input type="submit" value="Comment" class="btn btn-outline-info"/>
-        </form>
+        <br />
+        @foreach(Comment comment in story.Comments){
+            <br />
+            <div class="container ms-5">
+            <p>@comment.CommentText</p>
+            <p><strong>Posted by:</strong> @if (comment.Commenter.UserName != null) { <span>@comment.Commenter.UserName</span>} 
+                                        else{<span>anonymous</span>}
+                    <div class="fst-italic small m-0"> @comment.DatePosted.ToShortDateString()</div>
+                </p>
+            </div>
+        }
+        <a asp-action="PostComment" asp-route-storyId="@story.StoryPostId" class="btn btn-outline-info">Post Comment</a>
     </div>
 }
 

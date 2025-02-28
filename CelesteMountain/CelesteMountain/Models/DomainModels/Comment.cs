@@ -10,6 +10,6 @@ namespace CelesteMountain.Models
         public String CommentText { get; set; }
         public DateTime DatePosted { get; set; }
         public AppUser Commenter { get; set; }
-        public int StoryId { get; set; }  // FK to cause cascade delete
+        public int StoryPostId { get; set; }  // FK to cause cascade delete
     }
 }

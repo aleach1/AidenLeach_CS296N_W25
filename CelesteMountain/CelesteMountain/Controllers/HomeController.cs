@@ -90,9 +90,9 @@ namespace CelesteMountain.Controllers
         }
 
         [Authorize]
-        public IActionResult PostComment(StoryViewModel StoryVM)
+        public IActionResult PostComment(int storyId)
         {
-            CommentViewModel CommentVM = new CommentViewModel{Story = StoryVM.Story};
+            CommentViewModel CommentVM = new CommentViewModel{Story = _repo.GetStoryById(storyId)};
             return View(CommentVM);
         }
 

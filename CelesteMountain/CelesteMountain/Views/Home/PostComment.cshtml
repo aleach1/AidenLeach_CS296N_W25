@@ -27,7 +27,7 @@
         <input asp-for="Comment.CommentText" class="form-control p-3" required /><br />
     </div>
     <div class="form-group">
-        <input type="hidden" asp-for="Comment.StoryId" value="@Model.Story.StoryPostId" />
+        <input type="hidden" asp-for="Comment.StoryPostId" value="@Model.Story.StoryPostId" />
         <input type="submit" value="Submit Story" class="btn btn-info" />
     </div>
 </form>

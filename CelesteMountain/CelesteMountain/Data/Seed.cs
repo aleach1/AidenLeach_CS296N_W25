@@ -36,16 +36,7 @@ namespace CelesteMountain.Data
 
                 context.StoryPosts.Add(storyPost);  // queues up a review to be added to the DB
 
-                Comment comment = new Comment
-                {
-                    CommentText = "This Is something I needed",
-                    DatePosted = DateTime.Parse("11/30/24"),
-                    Commenter = userTwo,
-                    StoryId = 1
-                };
-
-                context.Comments.Add(comment);
-
+                
 
                 storyPost = new StoryPost
                 {
@@ -58,26 +49,8 @@ namespace CelesteMountain.Data
                 };
 
                 context.StoryPosts.Add(storyPost);
-
-                comment = new Comment
-                {
-                    CommentText = "If you haven't, you should consider checking out some speedruns and try copying the pathing they use.",
-                    DatePosted = DateTime.Parse("11/30/24"),
-                    Commenter = userThree,
-                    StoryId = 2
-                };
-
-                context.Comments.Add(comment);
-
-                comment = new Comment
-                {
-                    CommentText = "Good luck on the speedrunning!",
-                    DatePosted = DateTime.Parse("11/30/24"),
-                    Commenter = rootUser,
-                    StoryId = 2
-                };
-
-                context.Comments.Add(comment);
+                
+                
 
                 storyPost = new StoryPost // need to change the contents of the other posts
                 {
@@ -90,6 +63,38 @@ namespace CelesteMountain.Data
                 };
 
                 context.StoryPosts.Add(storyPost);
+
+                context.SaveChanges();
+
+                Comment comment = new Comment
+                {
+                    CommentText = "This Is something I needed",
+                    DatePosted = DateTime.Parse("11/30/24"),
+                    Commenter = userTwo,
+                    StoryPostId = 1
+                };
+
+                context.Comments.Add(comment);
+
+                comment = new Comment
+                {
+                    CommentText = "If you haven't, you should consider checking out some speedruns and try copying the pathing they use.",
+                    DatePosted = DateTime.Parse("11/30/24"),
+                    Commenter = userThree,
+                    StoryPostId = 2
+                };
+
+                context.Comments.Add(comment);
+
+                comment = new Comment
+                {
+                    CommentText = "Good luck on the speedrunning!",
+                    DatePosted = DateTime.Parse("11/30/24"),
+                    Commenter = rootUser,
+                    StoryPostId = 2
+                };
+
+                context.Comments.Add(comment);
 
 
                 context.SaveChanges(); // stores all the reviews in the DB
