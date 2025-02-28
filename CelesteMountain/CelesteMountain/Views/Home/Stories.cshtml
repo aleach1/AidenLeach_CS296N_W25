@@ -20,7 +20,6 @@
 @foreach (var story in Model.Stories)
 {
     <div class="container mt-5">
-        <p>@story.Comments.Count</p>
         <h2>@story.Title</h2>
         <h3>@story.Topic</h3>
         <p>@story.Text <br> <div class="container mx-5"> -Circa @story.StoryYear</div></p>
