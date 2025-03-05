@@ -78,15 +78,20 @@ namespace CelesteMountain.Controllers
             {
                 newStory.Poster = await userManager.GetUserAsync(User);
             }
-            if (await _repo.NewStoryAsync(newStory) > 0)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Index");
+                if (await _repo.NewStoryAsync(newStory) > 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "There was an error saving the review.";
+                    return View();
+                }
             }
-            else
-            {
-                ViewBag.ErrorMessage = "There was an error saving the review.";
-                return View();
-            }
+            else { return View(); }
+            
         }
 
         [Authorize]
@@ -114,15 +119,23 @@ namespace CelesteMountain.Controllers
             {
                 newComment.Commenter = await userManager.GetUserAsync(User);
             }
-            if (await _repo.NewCommentAsync(newComment) > 0)
+            if (ModelState.IsValid) 
             {
-                return RedirectToAction("Index");
+                if (await _repo.NewCommentAsync(newComment) > 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "There was an error saving the comment.";
+                    return View();
+                }
             }
             else
             {
-                ViewBag.ErrorMessage = "There was an error saving the comment.";
                 return View();
             }
+
         }
 
         public IActionResult Privacy()
