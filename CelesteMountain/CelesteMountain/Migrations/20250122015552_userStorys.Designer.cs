@@ -3,6 +3,7 @@ using System;
 using CelesteMountain.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CelesteMountain.Migrations
 {
     [DbContext(typeof(CelesteMountainContext))]
-    partial class CelesteMountainContextModelSnapshot : ModelSnapshot
+    [Migration("20250122015552_userStorys")]
+    partial class userStorys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,38 +85,9 @@ namespace CelesteMountain.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("CelesteMountain.Models.Comment", b =>
-                {
-                    b.Property<int>("CommentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("CommentText")
-                        .IsRequired()
-                        .HasMaxLength(750)
-                        .HasColumnType("varchar(750)");
-
-                    b.Property<string>("CommenterId")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<DateTime>("DatePosted")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("StoryPostId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CommentId");
-
-                    b.HasIndex("CommenterId");
-
-                    b.HasIndex("StoryPostId");
-
-                    b.ToTable("Comments");
-                });
-
             modelBuilder.Entity("CelesteMountain.Models.StoryPost", b =>
                 {
-                    b.Property<int>("StoryPostId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -128,19 +101,15 @@ namespace CelesteMountain.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
-                        .IsRequired()
-                        .HasMaxLength(750)
-                        .HasColumnType("varchar(750)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Topic")
                         .HasColumnType("longtext");
 
-                    b.HasKey("StoryPostId");
+                    b.HasKey("Id");
 
                     b.HasIndex("PosterId");
 
@@ -275,21 +244,6 @@ namespace CelesteMountain.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("CelesteMountain.Models.Comment", b =>
-                {
-                    b.HasOne("CelesteMountain.Models.AppUser", "Commenter")
-                        .WithMany()
-                        .HasForeignKey("CommenterId");
-
-                    b.HasOne("CelesteMountain.Models.StoryPost", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("StoryPostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Commenter");
-                });
-
             modelBuilder.Entity("CelesteMountain.Models.StoryPost", b =>
                 {
                     b.HasOne("CelesteMountain.Models.AppUser", "Poster")
@@ -348,11 +302,6 @@ namespace CelesteMountain.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("CelesteMountain.Models.StoryPost", b =>
-                {
-                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }

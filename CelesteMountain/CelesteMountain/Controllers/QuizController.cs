@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
-using CelesteMountain.Models;
 using System.IO;
 using System.Collections.Generic;
+using CelesteMountain.Models;
 
 namespace CelesteMountain.Controllers
 {
     public class QuizController : Controller
     {
         //I'll use json to store the quiz data for this, though we'll probably switch to database later
-        private readonly string _quizFilePath = Path.Combine(Directory.GetCurrentDirectory(), "AppData", "quizdata.json");
+        private readonly string _quizFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Models/AppData", "quizdata.json");
         [HttpGet]
         public IActionResult Index()
         {

@@ -1,0 +1,40 @@
+﻿@model CommentViewModel
+@{
+    ViewData["Title"] = "Comment";
+}
+<div class="container mt-5">
+    <h2>@Model.Story.Title</h2>
+    <h3>@Model.Story.Topic</h3>
+    <p>@Model.Story.Text <br> <div class="container mx-5"> -Circa @Model.Story.StoryYear</div></p>
+    <p>
+        <strong>Posted by:</strong> @if (Model.Story.Poster.UserName != null)
+        {
+            <span>@Model.Story.Poster.UserName</span>
+        }
+        else
+        {
+            <span>anonymous</span>
+        }
+        <div class="fst-italic small m-0"> @Model.Story.DatePosted.ToShortDateString()</div>
+    </p>
+</div>
+
+<h1 class="text-center fw-bolder">Comment</h1>
+
+<form asp-action="PostComment" asp-controller="Home" method="post">
+    <div class="form-group">
+        <label asp-for="Comment.CommentText">Comment Text:</label>
+        <span asp-validation-for="Comment.CommentText"></span>
+        <input asp-for="Comment.CommentText" class="form-control p-3" required /><br />
+    </div>
+    <div class="form-group">
+        <input type="hidden" asp-for="Comment.StoryPostId" value="@Model.Story.StoryPostId" />
+        <input type="submit" value="Submit Story" class="btn btn-info" />
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

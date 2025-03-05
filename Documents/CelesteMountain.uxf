@@ -1,0 +1,19 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>420</x><y>80</y><w>210</w><h>80</h></coordinates><panel_attributes>IdentityUser
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>140</x><y>210</y><w>210</w><h>130</h></coordinates><panel_attributes>StoryPost
+--
++StoryPostId: int
++Title: string
++Topic: string
++StoryYear: int
++Text: string
++DatePosted: DateTime</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>220</x><y>410</y><w>210</w><h>80</h></coordinates><panel_attributes>Comment
+--
++CommentId: int
++CommentText: string
++DatePosted: DateTime</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>450</x><y>220</y><w>210</w><h>80</h></coordinates><panel_attributes>AppUser
+--
++RoleNames: IList&lt;string&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>230</x><y>330</y><w>50</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=0..*</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>420</x><y>290</y><w>220</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=1</panel_attributes><additional_attributes>10;160;190;160;190;10</additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>260</y><w>130</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=1</panel_attributes><additional_attributes>10;10;110;10</additional_attributes></element><element><id>Relation</id><coordinates><x>510</x><y>150</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element></diagram>

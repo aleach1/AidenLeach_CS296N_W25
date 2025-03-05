@@ -1,20 +1,29 @@
-using CelesteMountain.Data;
+using CelesteMountain.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using CelesteMountain.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 
 // Add MySQL support
 var connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
 builder.Services.AddDbContext<CelesteMountainContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))/*, ServiceLifetime.Transient*/);
+
+
 
 // Register the repository and repository interface
 builder.Services.AddTransient<IStoryPostRepository, StoryPostRepository>();
 
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+//Add identity
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+  .AddEntityFrameworkStores<CelesteMountainContext>()
+  .AddDefaultTokenProviders();
 
 
 var app = builder.Build();
@@ -32,6 +41,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -41,8 +51,9 @@ app.MapControllerRoute(
 //get DbContext seed data
 using (var scope = app.Services.CreateScope())
 {
+    await SeedUsers.CreateAdminUser(scope.ServiceProvider);
     var dbContext = scope.ServiceProvider.GetRequiredService<CelesteMountainContext>();
-    SeedData.Seed(dbContext);
+    SeedData.Seed(dbContext, scope.ServiceProvider);
 
 }
 

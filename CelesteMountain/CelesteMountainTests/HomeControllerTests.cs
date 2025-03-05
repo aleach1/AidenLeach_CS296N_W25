@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CelesteMountainTests.Fakes;
-using CelesteMountain.Data;
 using CelesteMountain.Controllers;
 using CelesteMountain.Models;
 using Microsoft.Extensions.Logging;
+using CelesteMountain.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace CelesteMountainTests
 {
@@ -16,10 +17,12 @@ namespace CelesteMountainTests
         IStoryPostRepository _repo = new FakeStoryPostRepository();
         private readonly ILogger<HomeController> _logger;
         HomeController controller;
+        UserManager<AppUser> userManager;
+        private SignInManager<AppUser> signInManager;
 
         public HomeControllerTests()
         {
-            controller = new HomeController(_repo, _logger);
+            controller = new HomeController(_repo, _logger, userManager, signInManager);
         }
 
         [Fact]
@@ -32,7 +35,6 @@ namespace CelesteMountainTests
                 Topic = "Speedrunning",
                 StoryYear = 2024,
                 Text = "I never really knew how to do a lot of speedrunning tech, but the libraries in strawberry jam really helped me.",
-                Name = "Admin",
                 DatePosted = DateTime.Now
 
             };
@@ -41,7 +43,7 @@ namespace CelesteMountainTests
             var result = controller.PostStory(newPost);
 
             // Assert: Verify that StoryPost was added to repository
-            var addedRepo = _repo.GetStoryById(newPost.Id);
+            var addedRepo = _repo.GetStoryById(newPost.StoryPostId);
 
             Assert.NotNull(addedRepo);
             Assert.Equal(addedRepo, newPost);
