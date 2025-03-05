@@ -1,23 +1,34 @@
 ﻿@model StoryPost
 
 <form asp-action="PostStory" asp-controller="Home" method="post">
+    <div asp-validation-summary="All"></div>
     <div class="form-group">
-        <label>Title:</label>
+        <label asp-for="Title">Title:</label>
+        <span asp-validation-for="Title"></span>
         <input asp-for="Title" class="form-control p-3" required /><br />
     </div>
     <div class="form-group">
-        <label>Topic:</label>
+        <label asp-for="Topic">Topic:</label>
         <input asp-for="Topic" class="form-control p-3" required /><br />
     </div>
     <div class="form-group">
-        <label>Year the Story Occured:</label>
+        <label asp-for="StoryYear">Year the Story Occured:</label>
+        <span asp-validation-for="StoryYear"></span>
         <input type="number" asp-for="StoryYear" class="form-control p-3" required /><br />
     </div>
     <div class="form-group">
-        <label>Text:</label>
+        <label asp-for="Text">Text:</label>
+        <span asp-validation-for="Text"></span>
         <textarea asp-for="Text" class="form-control p-3" required></textarea><br />
     </div>
     <div class="form-group">
     <input type="hidden" asp-for="DatePosted" value="DateTime.Now" />
     <input type="submit" value="Submit Story" class="btn btn-info" />
+    </div>
 </form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
